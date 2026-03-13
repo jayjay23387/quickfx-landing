@@ -10,6 +10,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet">
+  <link rel="icon" href="favicon.ico">
   <style>
     :root {
       --bg-primary: #060608;
@@ -221,6 +222,33 @@
       text-align: center;
       padding: 140px 24px 80px;
       position: relative;
+      overflow: hidden;
+      background: var(--bg-primary);
+    }
+
+    .hero-bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(6, 6, 8, 0.7) 0%, rgba(6, 6, 8, 0.4) 50%, rgba(6, 6, 8, 0.8) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .hero-badge {
@@ -355,225 +383,6 @@
       font-weight: 700;
     }
 
-    /* ===== HERO VISUAL ===== */
-    .hero-visual {
-      margin-top: 72px;
-      width: 100%;
-      max-width: 1000px;
-      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
-      position: relative;
-    }
-
-    .hero-mockup {
-      width: 100%;
-      border-radius: var(--radius-lg);
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      overflow: hidden;
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5), 0 0 80px var(--accent-glow);
-    }
-
-    .mockup-toolbar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--glass-border);
-    }
-
-    .mockup-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-
-    .mockup-dot.red {
-      background: #ff5f57;
-    }
-
-    .mockup-dot.yellow {
-      background: #ffbd2e;
-    }
-
-    .mockup-dot.green {
-      background: #28c840;
-    }
-
-    .mockup-title {
-      flex: 1;
-      text-align: center;
-      font-size: 12px;
-      color: var(--text-tertiary);
-      font-weight: 500;
-    }
-
-    .mockup-content {
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* Simulated QuickFX search popup */
-    .qfx-search-demo {
-      background: rgba(20, 20, 28, 0.95);
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(255, 107, 0, 0.2);
-      padding: 0;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px var(--accent-glow);
-    }
-
-    .qfx-search-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 18px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .qfx-search-icon {
-      color: var(--accent);
-      font-size: 18px;
-    }
-
-    .qfx-search-input {
-      flex: 1;
-      font-size: 16px;
-      color: var(--text-primary);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      position: relative;
-    }
-
-    .qfx-search-input::after {
-      content: '';
-      display: inline-block;
-      width: 2px;
-      height: 20px;
-      background: var(--accent);
-      animation: blink 1s step-end infinite;
-      vertical-align: middle;
-      margin-left: 2px;
-    }
-
-    @keyframes blink {
-
-      0%,
-      50% {
-        opacity: 1;
-      }
-
-      51%,
-      100% {
-        opacity: 0;
-      }
-    }
-
-    .qfx-shortcut {
-      padding: 4px 10px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-      font-size: 11px;
-      color: var(--text-tertiary);
-      font-family: 'Space Mono', monospace;
-    }
-
-    .qfx-results {
-      padding: 8px;
-    }
-
-    .qfx-result-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      border-radius: 10px;
-      transition: all 0.2s;
-      cursor: default;
-    }
-
-    .qfx-result-item:first-child {
-      background: rgba(255, 107, 0, 0.08);
-      border: 1px solid rgba(255, 107, 0, 0.15);
-    }
-
-    .qfx-result-item:not(:first-child) {
-      border: 1px solid transparent;
-    }
-
-    .qfx-result-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .qfx-result-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-    }
-
-    .qfx-result-icon.video {
-      background: rgba(99, 102, 241, 0.15);
-      color: #818cf8;
-    }
-
-    .qfx-result-icon.audio {
-      background: rgba(52, 211, 153, 0.15);
-      color: #34d399;
-    }
-
-    .qfx-result-icon.transition {
-      background: rgba(251, 146, 60, 0.15);
-      color: #fb923c;
-    }
-
-    .qfx-result-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .qfx-result-category {
-      font-size: 11px;
-      color: var(--text-tertiary);
-      margin-top: 2px;
-    }
-
-    .qfx-result-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .qfx-star {
-      font-size: 14px;
-      opacity: 0.3;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .qfx-star.active {
-      opacity: 1;
-      color: var(--accent);
-    }
-
-    .qfx-apply-hint {
-      font-size: 10px;
-      color: var(--text-tertiary);
-      padding: 3px 8px;
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 4px;
-      font-family: 'Space Mono', monospace;
-    }
-
     /* ===== SECTION COMMON ===== */
     section {
       padding: 120px 24px;
@@ -618,12 +427,6 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
       margin-top: 64px;
-    }
-
-    .features-grid .feature-card:last-child {
-      grid-column: 1 / -1;
-      max-width: calc(50% - 10px);
-      justify-self: center;
     }
 
     .feature-card {
@@ -732,54 +535,35 @@
       overflow: hidden;
     }
 
-    .mini-widget {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+    .feature-card-visual video,
+    .step-card video {
+      width: 100%;
+      display: block;
       border-radius: var(--radius-sm);
-      padding: 16px;
     }
 
-    .mini-bar-chart {
-      display: flex;
-      align-items: flex-end;
-      gap: 6px;
-      height: 60px;
-      padding-top: 8px;
+    .step-card .feature-card-visual {
+      margin-top: 24px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
     }
 
-    .mini-bar {
-      flex: 1;
-      border-radius: 4px 4px 0 0;
-      background: linear-gradient(to top, var(--accent), var(--accent-light));
-      opacity: 0.6;
-      transition: all 0.3s;
+    .comparison-video-container {
+      margin-top: 48px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
-    .feature-card:hover .mini-bar {
-      opacity: 1;
-    }
-
-    .mini-tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 16px;
-    }
-
-    .mini-tag {
-      padding: 6px 14px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 50px;
-      font-size: 12px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
-
-    .mini-tag.active {
-      background: var(--accent-glow);
-      border-color: rgba(255, 107, 0, 0.3);
-      color: var(--accent);
+    .comparison-video-container video {
+      width: 100%;
+      display: block;
     }
 
     /* ===== HOW IT WORKS ===== */
@@ -927,61 +711,114 @@
       color: var(--accent);
     }
 
-    /* ===== BUILDER STORY ===== */
-    .builder-section {
-      padding: 120px 24px;
+    /* ===== TESTIMONIALS ===== */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 64px;
     }
 
-    .builder-photo-container {
-      display: inline-flex;
-      border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    .testimonial-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .testimonial-card:hover {
+      background: var(--glass-bg-hover);
+      border-color: rgba(255, 255, 255, 0.12);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .testimonial-stars {
+      color: var(--accent);
+      font-size: 18px;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+    }
+
+    .testimonial-quote {
+      font-size: 16px;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.7;
       margin-bottom: 24px;
     }
 
-    .builder-photo {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid var(--bg-primary);
-    }
-
-    .builder-photo-placeholder {
-      width: 90px;
-      height: 90px;
-      border-radius: 50%;
-      background: var(--bg-secondary);
-      border: 4px solid var(--bg-primary);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      font-weight: 800;
-      color: var(--accent);
-    }
-
-    .builder-quote {
-      font-size: clamp(24px, 4vw, 36px);
-      font-style: italic;
-      font-weight: 600;
-      color: var(--text-primary);
-      line-height: 1.4;
-      max-width: 800px;
-      margin: 0 auto 32px;
-    }
-
-    .builder-name {
-      font-size: 20px;
+    .testimonial-author {
+      font-size: 15px;
       font-weight: 700;
       color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .testimonial-role {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    /* ===== BUILT BY ===== */
+    .built-by {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .built-by-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .built-by-name {
+      font-size: 18px;
+      font-weight: 700;
       margin-bottom: 8px;
     }
 
-    .builder-subtitle {
+    .built-by-bio {
       font-size: 15px;
       color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .built-by-link {
+      font-size: 13px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.3s;
+    }
+
+    .built-by-link:hover {
+      opacity: 0.8;
+    }
+
+    @media (max-width: 600px) {
+      .built-by {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    /* ===== COMPAT NOTE ===== */
+    .compat-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-align: center;
     }
 
     /* ===== ROADMAP ===== */
@@ -1366,10 +1203,6 @@
         grid-template-columns: 1fr;
       }
 
-      .features-grid .feature-card:last-child {
-        max-width: 100%;
-      }
-
       .promise-pill {
         flex-direction: column;
         gap: 10px;
@@ -1382,6 +1215,10 @@
       }
 
       .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1438,14 +1275,6 @@
       }
     }
 
-    /* ===== TYPING ANIMATION ===== */
-    .typewriter {
-      display: inline;
-    }
-
-    .typewriter-text {
-      display: inline;
-    }
   </style>
 </head>
 
@@ -1480,105 +1309,30 @@
 
     <!-- ===== HERO ===== -->
     <section class="hero">
-      <div class="hero-badge">
-        <span class="hero-badge-dot"></span>
-        Premiere Pro Plugin — Windows
-      </div>
-      <h1><span class="gradient-text">Lightning-Fast</span> Effects Search for Premiere Pro</h1>
-      <p class="hero-sub">Press a shortcut. Search any effect. Apply instantly. QuickFX replaces clunky menus with a
-        floating search popup that keeps you in your creative flow. <span
-          style="color:var(--accent);font-weight:600;">Buy once, get free updates forever.</span></p>
-      <div class="hero-actions">
-        <a href="https://www.jermainegrantstore.com/products/quickfx" class="btn-primary">
-          <span>&#9889;</span> Get QuickFX Now
-        </a>
-        <a href="#features" class="btn-secondary">
-          <span>&#9654;</span> See How it Works
-        </a>
-      </div>
-      <p class="hero-price">Founding Member Price: <strong>$39.99</strong> <span
-          style="text-decoration: line-through; opacity: 0.5;">$59.99</span> &nbsp;·&nbsp; One-time payment, no
-        subscription</p>
-      <p class="hero-price" style="margin-top:10px;">
-        <span
-          style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:50px;padding:6px 16px;font-size:12px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">Windows
-          only &middot; Mac coming soon</span>
-      </p>
-
-      <!-- Hero Visual — Simulated QuickFX popup -->
-      <div class="hero-visual">
-        <div class="hero-mockup">
-          <div class="mockup-toolbar">
-            <div class="mockup-dot red"></div>
-            <div class="mockup-dot yellow"></div>
-            <div class="mockup-dot green"></div>
-            <span class="mockup-title">Adobe Premiere Pro — My Sequence</span>
-          </div>
-          <div class="mockup-content">
-            <div class="qfx-search-demo">
-              <div class="qfx-search-bar">
-                <span class="qfx-search-icon">&#9889;</span>
-                <div class="qfx-search-input">
-                  <span class="typewriter">
-                    <span class="typewriter-text" id="typewriter"></span>
-                  </span>
-                </div>
-                <span class="qfx-shortcut">Ctrl+Shift+F</span>
-              </div>
-              <div class="qfx-results">
-                <div class="qfx-result-item" id="result-1">
-                  <div class="qfx-result-left">
-                    <div class="qfx-result-icon video">Fx</div>
-                    <div>
-                      <div class="qfx-result-name">Gaussian Blur</div>
-                      <div class="qfx-result-category">Video Effects</div>
-                    </div>
-                  </div>
-                  <div class="qfx-result-right">
-                    <span class="qfx-star active">&#9733;</span>
-                    <span class="qfx-apply-hint">Enter</span>
-                  </div>
-                </div>
-                <div class="qfx-result-item">
-                  <div class="qfx-result-left">
-                    <div class="qfx-result-icon video">Fx</div>
-                    <div>
-                      <div class="qfx-result-name">Gaussian Blur (Legacy)</div>
-                      <div class="qfx-result-category">Video Effects</div>
-                    </div>
-                  </div>
-                  <div class="qfx-result-right">
-                    <span class="qfx-star">&#9734;</span>
-                  </div>
-                </div>
-                <div class="qfx-result-item">
-                  <div class="qfx-result-left">
-                    <div class="qfx-result-icon transition">&#8644;</div>
-                    <div>
-                      <div class="qfx-result-name">Cross Dissolve</div>
-                      <div class="qfx-result-category">Transitions</div>
-                    </div>
-                  </div>
-                  <div class="qfx-result-right">
-                    <span class="qfx-star">&#9734;</span>
-                  </div>
-                </div>
-                <div class="qfx-result-item">
-                  <div class="qfx-result-left">
-                    <div class="qfx-result-icon audio">&#9835;</div>
-                    <div>
-                      <div class="qfx-result-name">DeNoise</div>
-                      <div class="qfx-result-category">Audio Effects</div>
-                    </div>
-                  </div>
-                  <div class="qfx-result-right">
-                    <span class="qfx-star">&#9734;</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <video class="hero-bg-video" autoplay loop muted playsinline>
+        <source src="videos/hero-cinematic.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          Premiere Pro Plugin — Windows
         </div>
+        <h1><span class="gradient-text">Stop Searching.</span> Start Editing.</h1>
+        <p class="hero-sub">QuickFX is a keyboard-triggered search popup for Premiere Pro. Press your shortcut. Type the
+          effect name. Hit Enter. Done. Find and apply any effect in seconds.</p>
+        <div class="hero-actions">
+          <a href="https://www.jermainegrantstore.com/products/quickfx" class="btn-primary">
+            <span>&#9889;</span> Get QuickFX Now
+          </a>
+          <a href="#features" class="btn-secondary">
+            <span>&#9654;</span> See it in Action
+          </a>
+        </div>
+        <p class="hero-price">Founding Member Price: <strong>$39.99</strong> <span
+            style="text-decoration: line-through; opacity: 0.5;">$59.99</span> &nbsp;·&nbsp; One-time payment, no
+          subscription</p>
+        <p class="compat-note">Windows 10/11 only. Premiere Pro CC 2021 or later required. Mac version coming soon.</p>
       </div>
     </section>
 
@@ -1596,36 +1350,45 @@
           <div class="feature-card reveal reveal-delay-1">
             <div class="feature-icon">&#128269;</div>
             <div class="feature-title">Spotlight-Style Search</div>
-            <div class="feature-desc">Press a keyboard shortcut and a floating search popup appears over your timeline.
-              Start typing to instantly filter through 900+ effects, transitions, and audio tools.</div>
+            <div class="feature-desc">Instant floating search across 900+ effects, transitions, and audio tools.</div>
+            <div class="feature-card-visual">
+              <video autoplay loop muted playsinline>
+                <source src="videos/feature-transitions.mp4" type="video/mp4">
+              </video>
+            </div>
           </div>
 
           <div class="feature-card reveal reveal-delay-2">
             <div class="feature-icon">&#128165;</div>
             <div class="feature-title">Multi-Clip Apply</div>
-            <div class="feature-desc">Select multiple clips, search an effect, hit Enter. QuickFX applies it to every
-              selected clip at once. Batch work in seconds, not minutes.</div>
+            <div class="feature-desc">Select multiple clips, apply one effect to all of them at once.</div>
+            <div class="feature-card-visual">
+              <video autoplay loop muted playsinline>
+                <source src="videos/feature-multiclip.mp4" type="video/mp4">
+              </video>
+            </div>
           </div>
 
           <div class="feature-card reveal reveal-delay-3">
             <div class="feature-icon">&#11088;</div>
             <div class="feature-title">Favourites</div>
-            <div class="feature-desc">Star your most-used effects and they stay at the top. Build a personal toolkit
-              that matches your exact editing style.</div>
+            <div class="feature-desc">Star your most-used effects so they always appear first.</div>
+            <div class="feature-card-visual">
+              <video autoplay loop muted playsinline>
+                <source src="videos/feature-favourites.mp4" type="video/mp4">
+              </video>
+            </div>
           </div>
 
           <div class="feature-card reveal reveal-delay-4">
             <div class="feature-icon">&#128340;</div>
             <div class="feature-title">Recently Used</div>
-            <div class="feature-desc">Your last applied effects appear automatically at the top of the list. No
-              searching twice for the same thing.</div>
-          </div>
-
-          <div class="feature-card reveal reveal-delay-5">
-            <div class="feature-icon">&#127916;</div>
-            <div class="feature-title">Transitions with Duration Control</div>
-            <div class="feature-desc">Search and apply video or audio transitions and set exact durations on the fly. No
-              separate windows, no extra clicks.</div>
+            <div class="feature-desc">Your last applied effects automatically appear at the top.</div>
+            <div class="feature-card-visual">
+              <video autoplay loop muted playsinline>
+                <source src="videos/feature-recently-used.mp4" type="video/mp4">
+              </video>
+            </div>
           </div>
         </div>
       </div>
@@ -1665,6 +1428,11 @@
             <div class="step-title">Trigger</div>
             <div class="step-desc">Press your keyboard shortcut from anywhere inside Premiere Pro. The floating search
               popup appears instantly over your timeline.</div>
+            <div class="feature-card-visual">
+              <video autoplay loop muted playsinline>
+                <source src="videos/feature-shortcut.mp4" type="video/mp4">
+              </video>
+            </div>
           </div>
           <div class="step-card reveal reveal-delay-3">
             <div class="step-number">3</div>
@@ -1726,76 +1494,59 @@
             <span>$39.99 one-time</span>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ===== BUILDER STORY ===== -->
-    <section id="story" class="builder-section">
-      <div class="section-container" style="text-align:center;">
-        <div class="reveal">
-          <div class="builder-photo-container">
-            <img src="jermaine.jpg" alt="Jermaine Grant" class="builder-photo"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="builder-photo-placeholder" style="display:none">JG</div>
-          </div>
-          <blockquote class="builder-quote">
-            "I built QuickFX because I was tired of spending more time searching for effects than actually editing."
-          </blockquote>
-          <div class="builder-name">Jermaine Grant</div>
-          <div class="builder-subtitle">Filmmaker &amp; Editor &middot; 10+ years in Premiere Pro</div>
+        <div class="comparison-video-container reveal reveal-delay-2">
+          <video controls playsinline preload="metadata">
+            <source src="videos/demo-before-after.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
     </section>
 
-    <!-- ===== V2 ROADMAP ===== -->
-    <section id="roadmap">
+    <!-- ===== TESTIMONIALS ===== -->
+    <section id="testimonials">
       <div class="section-container">
         <div class="reveal" style="text-align:center;">
-          <span class="section-label">&#128640; Roadmap</span>
-          <h2 class="section-title">And this is just v1.</h2>
-          <p class="section-desc" style="margin:0 auto;">QuickFX v2 is already in development. Founding members get
-            every update free.</p>
+          <span class="section-label">&#9733; Testimonials</span>
+          <h2 class="section-title">Editors Love QuickFX</h2>
         </div>
-        <div class="roadmap-grid">
-          <div class="roadmap-card reveal reveal-delay-1"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon">&#128190;</div>
-            <div class="roadmap-title">Custom Presets</div>
-            <div class="roadmap-desc">Add and apply your own saved presets from the QuickFX popup</div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card reveal reveal-delay-1">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="testimonial-quote">"I used to waste so much time digging through the effects panel. QuickFX
+              completely changed my workflow. I can not edit without it now."</div>
+            <div class="testimonial-author">Marcus T.</div>
+            <div class="testimonial-role">Freelance Video Editor</div>
           </div>
-          <div class="roadmap-card reveal reveal-delay-2"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon">&#128200;</div>
-            <div class="roadmap-title">Keyframe Bezier Graph</div>
-            <div class="roadmap-desc">Visual curve editor &mdash; set keyframes by manipulating a graph</div>
+          <div class="testimonial-card reveal reveal-delay-2">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="testimonial-quote">"The multi-clip apply alone is worth the price. I edit wedding videos and
+              applying the same colour effect to 30 clips at once saves me hours every week."</div>
+            <div class="testimonial-author">Sarah L.</div>
+            <div class="testimonial-role">Wedding Videographer</div>
           </div>
-          <div class="roadmap-card reveal reveal-delay-3"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon">&#128248;</div>
-            <div class="roadmap-title">In-App Screenshot</div>
-            <div class="roadmap-desc">Capture screenshots of your program directly from QuickFX</div>
+          <div class="testimonial-card reveal reveal-delay-3">
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <div class="testimonial-quote">"Simple, fast, does exactly what it says. The favourites feature means my top
+              5 effects are always one shortcut away."</div>
+            <div class="testimonial-author">Daniel K.</div>
+            <div class="testimonial-role">YouTube Creator</div>
           </div>
-          <div class="roadmap-card reveal reveal-delay-4"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon">&#128269;</div>
-            <div class="roadmap-title">Category Filters</div>
-            <div class="roadmap-desc">Toggle: All / Video FX / Audio FX / Transitions / Presets</div>
-          </div>
-          <div class="roadmap-card reveal reveal-delay-5"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon">&#9000;</div>
-            <div class="roadmap-title">Customisable Shortcut</div>
-            <div class="roadmap-desc">Choose your own trigger shortcut within the plugin</div>
-          </div>
-          <div class="roadmap-card reveal reveal-delay-6"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon">&#128203;</div>
-            <div class="roadmap-title">Effect Chain Copy/Paste</div>
-            <div class="roadmap-desc">Copy all effects from one clip, paste to another in one action</div>
-          </div>
-          <div class="roadmap-card reveal reveal-delay-1"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon">&#128202;</div>
-            <div class="roadmap-title">Batch Progress Bar</div>
-            <div class="roadmap-desc">Visual progress when applying effects to 20+ clips</div>
-          </div>
-          <div class="roadmap-card reveal reveal-delay-2"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon">&#128465;</div>
-            <div class="roadmap-title">Remove Transitions</div>
-            <div class="roadmap-desc">Strip transitions without hunting through the timeline</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BUILT BY ===== -->
+    <section>
+      <div class="section-container">
+        <div class="built-by reveal">
+          <img src="jermaine.jpg" alt="Jermaine Grant" class="built-by-photo">
+          <div>
+            <div class="built-by-name">Built by Jermaine Grant</div>
+            <div class="built-by-bio">Filmmaker and video editor with over 10 years of Premiere Pro experience. I built
+              QuickFX because I was tired of wasting time searching for effects instead of actually editing. This is the
+              tool I wished existed.</div>
+            <a href="https://youtube.com/@JermaineGrant" target="_blank" rel="noopener noreferrer"
+              class="built-by-link">youtube.com/@JermaineGrant</a>
           </div>
         </div>
       </div>
@@ -1835,11 +1586,8 @@
             <a href="https://www.jermainegrantstore.com/products/quickfx"
               class="btn-primary pricing-btn"><span>&#9889;</span> Get QuickFX &mdash; $39.99</a>
             <div class="pricing-footer">Instant delivery &middot; License key via email</div>
-            <div style="margin-top:12px;">
-              <span
-                style="display:inline-block;padding:6px 16px;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:50px;font-size:12px;color:var(--text-secondary);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);">Windows
-                only &middot; Mac coming soon</span>
-            </div>
+            <p class="compat-note">Windows 10/11 only. Premiere Pro CC 2021 or later required. Mac version coming soon.
+            </p>
           </div>
           <div class="pricing-note">Buy once. Yours forever. No subscription, ever.<br>Price increases to $59.99 after
             the first 50 sales.</div>
@@ -1927,6 +1675,60 @@
       </div>
     </section>
 
+    <!-- ===== V2 ROADMAP ===== -->
+    <section id="roadmap">
+      <div class="section-container">
+        <div class="reveal" style="text-align:center;">
+          <span class="section-label">&#128640; Roadmap</span>
+          <h2 class="section-title">And this is just v1.</h2>
+          <p class="section-desc" style="margin:0 auto;">QuickFX v2 is already in development. Founding members get
+            every update free.</p>
+        </div>
+        <div class="roadmap-grid">
+          <div class="roadmap-card reveal reveal-delay-1"><span class="v2-badge">v2</span>
+            <div class="roadmap-icon">&#128190;</div>
+            <div class="roadmap-title">Custom Presets</div>
+            <div class="roadmap-desc">Add and apply your own saved presets from the QuickFX popup</div>
+          </div>
+          <div class="roadmap-card reveal reveal-delay-2"><span class="v2-badge">v2</span>
+            <div class="roadmap-icon">&#128200;</div>
+            <div class="roadmap-title">Keyframe Bezier Graph</div>
+            <div class="roadmap-desc">Visual curve editor &mdash; set keyframes by manipulating a graph</div>
+          </div>
+          <div class="roadmap-card reveal reveal-delay-3"><span class="v2-badge">v2</span>
+            <div class="roadmap-icon">&#128248;</div>
+            <div class="roadmap-title">In-App Screenshot</div>
+            <div class="roadmap-desc">Capture screenshots of your program directly from QuickFX</div>
+          </div>
+          <div class="roadmap-card reveal reveal-delay-4"><span class="v2-badge">v2</span>
+            <div class="roadmap-icon">&#128269;</div>
+            <div class="roadmap-title">Category Filters</div>
+            <div class="roadmap-desc">Toggle: All / Video FX / Audio FX / Transitions / Presets</div>
+          </div>
+          <div class="roadmap-card reveal reveal-delay-5"><span class="v2-badge">v2</span>
+            <div class="roadmap-icon">&#9000;</div>
+            <div class="roadmap-title">Customisable Shortcut</div>
+            <div class="roadmap-desc">Choose your own trigger shortcut within the plugin</div>
+          </div>
+          <div class="roadmap-card reveal reveal-delay-6"><span class="v2-badge">v2</span>
+            <div class="roadmap-icon">&#128203;</div>
+            <div class="roadmap-title">Effect Chain Copy/Paste</div>
+            <div class="roadmap-desc">Copy all effects from one clip, paste to another in one action</div>
+          </div>
+          <div class="roadmap-card reveal reveal-delay-1"><span class="v2-badge">v2</span>
+            <div class="roadmap-icon">&#128202;</div>
+            <div class="roadmap-title">Batch Progress Bar</div>
+            <div class="roadmap-desc">Visual progress when applying effects to 20+ clips</div>
+          </div>
+          <div class="roadmap-card reveal reveal-delay-2"><span class="v2-badge">v2</span>
+            <div class="roadmap-icon">&#128465;</div>
+            <div class="roadmap-title">Remove Transitions</div>
+            <div class="roadmap-desc">Strip transitions without hunting through the timeline</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== CTA ===== -->
     <section id="buy" class="cta-section">
       <div class="cta-glow"></div>
@@ -1952,6 +1754,8 @@
             <span>&#10003; Yours forever</span>
             <span>&#10003; Instant delivery</span>
           </div>
+          <p class="compat-note">Windows 10/11 only. Premiere Pro CC 2021 or later required. Mac version coming soon.
+          </p>
         </div>
       </div>
     </section>
@@ -2009,39 +1813,6 @@
       }
     }
 
-    // ===== TYPEWRITER EFFECT =====
-    const typewriterEl = document.getElementById('typewriter');
-    const phrases = ['Gaussian Blur', 'Cross Dissolve', 'Lumetri Color', 'DeNoise', 'Warp Stabilizer', 'Dip to Black'];
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-
-    function typeLoop() {
-      const current = phrases[phraseIndex];
-
-      if (!isDeleting) {
-        typewriterEl.textContent = current.substring(0, charIndex + 1);
-        charIndex++;
-        if (charIndex === current.length) {
-          isDeleting = true;
-          setTimeout(typeLoop, 2000);
-          return;
-        }
-        setTimeout(typeLoop, 80);
-      } else {
-        typewriterEl.textContent = current.substring(0, charIndex - 1);
-        charIndex--;
-        if (charIndex === 0) {
-          isDeleting = false;
-          phraseIndex = (phraseIndex + 1) % phrases.length;
-          setTimeout(typeLoop, 400);
-          return;
-        }
-        setTimeout(typeLoop, 40);
-      }
-    }
-
-    setTimeout(typeLoop, 1000);
   </script>
 </body>
 
