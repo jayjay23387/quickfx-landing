@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet">
   <link rel="icon" href="favicon.ico">
   <style>
@@ -19,16 +19,16 @@
       --accent-light: #FF8A33;
       --accent-glow: rgba(255, 107, 0, 0.15);
       --accent-glow-strong: rgba(255, 107, 0, 0.3);
-      --card-bg: #111827;
-      --card-border: #1F2937;
-      --card-bg-hover: #1a2332;
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-bg-hover: rgba(255, 255, 255, 0.07);
       --text-primary: #f0f0f5;
       --text-secondary: rgba(240, 240, 245, 0.6);
-      --text-tertiary: #9CA3AF;
+      --text-tertiary: rgba(240, 240, 245, 0.4);
       --radius-sm: 12px;
-      --radius-md: 12px;
-      --radius-lg: 12px;
-      --radius-xl: 16px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --radius-xl: 36px;
     }
 
     * {
@@ -43,12 +43,78 @@
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== AMBIENT BACKGROUND ===== */
+    .ambient-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.4;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+
+    .ambient-orb.orb-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 107, 0, 0.25), transparent 70%);
+      top: -15%;
+      left: -10%;
+      animation-duration: 25s;
+    }
+
+    .ambient-orb.orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 138, 51, 0.15), transparent 70%);
+      top: 40%;
+      right: -15%;
+      animation-duration: 30s;
+      animation-delay: -5s;
+    }
+
+    .ambient-orb.orb-3 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 107, 0, 0.12), transparent 70%);
+      bottom: 10%;
+      left: 20%;
+      animation-duration: 22s;
+      animation-delay: -10s;
+    }
+
+    @keyframes orbFloat {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      25% {
+        transform: translate(30px, -40px) scale(1.05);
+      }
+
+      50% {
+        transform: translate(-20px, 20px) scale(0.95);
+      }
+
+      75% {
+        transform: translate(40px, 30px) scale(1.02);
+      }
     }
 
     /* ===== GRID OVERLAY ===== */
@@ -71,12 +137,6 @@
       z-index: 1;
     }
 
-    /* ===== KEYBOARD TEXT ===== */
-    .kbd-text {
-      font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-      font-weight: 500;
-    }
-
     /* ===== NAVBAR ===== */
     .navbar {
       position: fixed;
@@ -85,14 +145,14 @@
       right: 0;
       z-index: 100;
       padding: 16px 40px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .navbar.scrolled {
       background: rgba(6, 6, 8, 0.85);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--glass-border);
     }
 
     .navbar-inner {
@@ -127,7 +187,7 @@
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
-      transition: color 0.2s ease-out;
+      transition: color 0.3s;
       letter-spacing: 0.2px;
     }
 
@@ -139,11 +199,11 @@
       background: var(--accent) !important;
       color: var(--bg-primary) !important;
       padding: 10px 24px;
-      border-radius: 60px;
+      border-radius: 50px;
       font-weight: 700 !important;
       font-size: 13px !important;
       letter-spacing: 0.3px;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
       box-shadow: 0 0 24px var(--accent-glow);
     }
 
@@ -183,21 +243,9 @@
       z-index: 1;
     }
 
-    .hero-glow {
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(circle, rgba(255, 107, 0, 0.06), transparent 60%);
-      pointer-events: none;
-      z-index: 2;
-    }
-
     .hero-content {
       position: relative;
-      z-index: 3;
+      z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -207,16 +255,16 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 20px 8px 14px;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 999px;
+      padding: 8px 20px 8px 12px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
       font-size: 13px;
       color: var(--text-secondary);
-      margin-bottom: 28px;
-      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+      margin-bottom: 32px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
     .hero-badge-dot {
@@ -224,15 +272,18 @@
       height: 8px;
       background: var(--accent);
       border-radius: 50%;
+      box-shadow: 0 0 12px var(--accent-glow-strong);
       animation: pulse 2s ease-in-out infinite;
     }
 
     @keyframes pulse {
+
       0%,
       100% {
         opacity: 1;
         transform: scale(1);
       }
+
       50% {
         opacity: 0.6;
         transform: scale(1.3);
@@ -240,13 +291,13 @@
     }
 
     .hero h1 {
-      font-size: clamp(2.2rem, 8vw, 6.5rem);
+      font-size: clamp(48px, 7vw, 88px);
       font-weight: 800;
       line-height: 1.05;
-      letter-spacing: -2.5px;
+      letter-spacing: -2px;
       max-width: 900px;
-      margin-bottom: 20px;
-      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
     }
 
     .hero h1 .gradient-text {
@@ -257,30 +308,20 @@
     }
 
     .hero-sub {
-      font-size: 1.125rem;
-      color: rgba(255, 255, 255, 0.85);
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-secondary);
       max-width: 560px;
       line-height: 1.7;
       font-weight: 400;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      letter-spacing: normal;
-      word-spacing: normal;
-      text-align: center;
-      margin-bottom: 40px;
-      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-    }
-
-    .hero-sub .kbd-text {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 1);
+      margin-bottom: 48px;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
     }
 
     .hero-actions {
       display: flex;
       align-items: center;
       gap: 16px;
-      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
     }
 
     .btn-primary {
@@ -296,14 +337,14 @@
       text-decoration: none;
       border: none;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 40px rgba(255, 107, 0, 0.3), 0 0 20px rgba(255, 107, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 40px var(--accent-glow-strong), inset 0 1px 0 rgba(255, 255, 255, 0.2);
       letter-spacing: 0.3px;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 8px 60px rgba(255, 107, 0, 0.45), 0 0 20px rgba(255, 107, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 60px rgba(255, 107, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
     }
 
     .btn-secondary {
@@ -311,37 +352,30 @@
       align-items: center;
       gap: 10px;
       padding: 16px 36px;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
       color: var(--text-primary);
       font-size: 15px;
       font-weight: 600;
       border-radius: 60px;
       text-decoration: none;
       cursor: pointer;
-      transition: all 0.2s ease-out;
+      transition: all 0.3s;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.14);
-      border-color: rgba(255, 255, 255, 0.2);
+      background: var(--glass-bg-hover);
+      border-color: rgba(255, 255, 255, 0.15);
       transform: translateY(-1px);
     }
 
     .hero-price {
       margin-top: 20px;
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.85);
-      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 10px 20px;
-      border-radius: 8px;
-      display: inline-block;
+      color: var(--text-tertiary);
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
     }
 
     .hero-price strong {
@@ -351,7 +385,7 @@
 
     /* ===== SECTION COMMON ===== */
     section {
-      padding: 96px 24px;
+      padding: 120px 24px;
     }
 
     .section-container {
@@ -369,17 +403,12 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       margin-bottom: 16px;
-      font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-      text-shadow: 0 0 12px rgba(255, 107, 0, 0.3);
-    }
-
-    .section-label svg {
-      flex-shrink: 0;
+      font-family: 'Space Mono', monospace;
     }
 
     .section-title {
       font-size: clamp(36px, 5vw, 56px);
-      font-weight: 700;
+      font-weight: 800;
       line-height: 1.1;
       letter-spacing: -1.5px;
       margin-bottom: 20px;
@@ -401,17 +430,15 @@
     }
 
     .feature-card {
-      background: rgba(255, 255, 255, 0.04);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-lg);
-      padding: 40px 36px;
-      transition: all 0.2s ease-out;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
     }
 
     .feature-card::before {
@@ -421,16 +448,16 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.3), transparent);
       opacity: 0;
-      transition: opacity 0.2s;
+      transition: opacity 0.4s;
     }
 
     .feature-card:hover {
-      background: rgba(255, 255, 255, 0.06);
+      background: var(--glass-bg-hover);
       border-color: rgba(255, 255, 255, 0.12);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     }
 
     .feature-card:hover::before {
@@ -450,9 +477,11 @@
       align-items: center;
       gap: 20px;
       padding: 16px 36px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
+      background: var(--glass-bg);
+      border: 1px solid rgba(255, 107, 0, 0.15);
+      border-radius: 60px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       font-size: 15px;
       font-weight: 600;
       color: var(--text-primary);
@@ -464,6 +493,7 @@
       height: 6px;
       border-radius: 50%;
       background: var(--accent);
+      box-shadow: 0 0 10px var(--accent-glow-strong);
       flex-shrink: 0;
     }
 
@@ -479,10 +509,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 24px;
       margin-bottom: 24px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--card-border);
-      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(255, 107, 0, 0.15);
     }
 
     .feature-title {
@@ -513,21 +543,22 @@
     }
 
     .step-card .feature-card-visual {
-      margin-top: auto;
-      padding-top: 24px;
+      margin-top: 24px;
       border-radius: var(--radius-sm);
       overflow: hidden;
     }
 
     .comparison-video-container {
       margin-top: 48px;
-      max-width: 700px;
+      max-width: 800px;
       margin-left: auto;
       margin-right: auto;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     .comparison-video-container video {
@@ -544,80 +575,21 @@
     }
 
     .step-card {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius-lg);
       padding: 40px 32px;
       text-align: center;
-      transition: all 0.2s ease-out;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .step-video-placeholder {
-      margin-top: auto;
-      padding-top: 24px;
-    }
-
-    .step-installer-box {
-      aspect-ratio: 16 / 10;
-      background: #0D1117;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius-sm);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .step-installer-filename {
-      font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-primary);
-      letter-spacing: 0.3px;
-    }
-
-    .step-effect-box {
-      aspect-ratio: 16 / 10;
-      background: #0D1117;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: var(--radius-sm);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .step-effect-check {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 107, 0, 0.12);
-      border: 2px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-    }
-
-    .step-effect-label {
-      font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--accent);
-      letter-spacing: 0.3px;
     }
 
     .step-card:hover {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.12);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      background: var(--glass-bg-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     }
 
     .step-number {
@@ -629,10 +601,10 @@
       justify-content: center;
       margin: 0 auto 24px;
       font-size: 22px;
-      font-weight: 700;
+      font-weight: 800;
       background: linear-gradient(135deg, var(--accent), var(--accent-light));
       color: #fff;
-      box-shadow: 0 0 16px rgba(255, 107, 0, 0.2);
+      box-shadow: 0 0 30px var(--accent-glow-strong);
     }
 
     .step-title {
@@ -654,9 +626,11 @@
 
     .comparison-table {
       margin-top: 64px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius-lg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       overflow: hidden;
       max-width: 800px;
       margin-left: auto;
@@ -667,7 +641,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       padding: 24px 32px;
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--glass-border);
       font-weight: 700;
       font-size: 15px;
     }
@@ -746,27 +720,27 @@
     }
 
     .testimonial-card {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius-lg);
       padding: 36px 32px;
-      transition: all 0.2s ease-out;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .testimonial-card:hover {
-      background: rgba(255, 255, 255, 0.06);
+      background: var(--glass-bg-hover);
       border-color: rgba(255, 255, 255, 0.12);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     }
 
     .testimonial-stars {
       color: var(--accent);
-      display: flex;
-      gap: 4px;
+      font-size: 18px;
       margin-bottom: 20px;
+      letter-spacing: 2px;
     }
 
     .testimonial-quote {
@@ -825,11 +799,11 @@
       color: var(--accent);
       text-decoration: none;
       font-weight: 600;
-      transition: color 0.2s ease-out;
+      transition: opacity 0.3s;
     }
 
     .built-by-link:hover {
-      color: var(--accent-light);
+      opacity: 0.8;
     }
 
     @media (max-width: 600px) {
@@ -847,39 +821,27 @@
       text-align: center;
     }
 
-    .hero .compat-note {
-      color: rgba(255, 255, 255, 0.6);
-      background: rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 8px 18px;
-      border-radius: 8px;
-      display: inline-block;
-      margin-top: 10px;
-    }
-
     /* ===== ROADMAP ===== */
     .roadmap-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       margin-top: 64px;
     }
 
     .roadmap-card {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius-md);
       padding: 24px;
       position: relative;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .roadmap-card:hover {
-      background: rgba(255, 255, 255, 0.06);
+      background: var(--glass-bg-hover);
       border-color: rgba(255, 255, 255, 0.12);
       transform: translateY(-2px);
     }
@@ -894,11 +856,12 @@
       background: rgba(255, 255, 255, 0.08);
       padding: 4px 8px;
       border-radius: 4px;
-      font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+      font-family: 'Space Mono', monospace;
       letter-spacing: 0.5px;
     }
 
     .roadmap-icon {
+      font-size: 24px;
       margin-bottom: 16px;
       color: var(--text-secondary);
     }
@@ -919,21 +882,21 @@
     /* ===== PRICING ===== */
     .pricing-section {
       text-align: center;
-      padding: 96px 24px;
+      padding: 120px 24px;
     }
 
     .pricing-card {
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 107, 0, 0.3);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius-xl);
       padding: 48px;
       max-width: 480px;
       margin: 0 auto;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(255, 107, 0, 0.12);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
     }
 
     .pricing-card::before {
@@ -947,16 +910,15 @@
     }
 
     .pricing-badge {
-      display: inline-flex;
-      align-items: center;
-      background: rgba(255, 107, 0, 0.1);
+      display: inline-block;
+      background: var(--accent-glow-strong);
       color: var(--accent);
       padding: 6px 16px;
-      border-radius: 8px;
+      border-radius: 50px;
       font-size: 13px;
       font-weight: 700;
       margin-bottom: 24px;
-      border: 1px solid rgba(255, 107, 0, 0.15);
+      border: 1px solid rgba(255, 107, 0, 0.3);
     }
 
     .pricing-price-wrap {
@@ -968,16 +930,15 @@
     }
 
     .pricing-old {
-      font-size: 30px;
-      font-weight: 600;
+      font-size: 24px;
       color: var(--text-tertiary);
       text-decoration: line-through;
     }
 
     .pricing-current {
-      font-size: 96px;
+      font-size: 64px;
       font-weight: 800;
-      letter-spacing: -4px;
+      letter-spacing: -2px;
     }
 
     .pricing-sub {
@@ -1004,8 +965,7 @@
 
     .pricing-check {
       color: var(--accent);
-      flex-shrink: 0;
-      margin-top: 2px;
+      font-weight: 800;
     }
 
     .pricing-btn {
@@ -1021,14 +981,23 @@
       color: var(--text-tertiary);
     }
 
-    .pricing-note {
-      margin-top: 24px;
-      font-size: 16px;
-      font-weight: 600;
-      color: #f1f5f9;
+    .pricing-mac-note {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 4px;
+      font-size: 12px;
+      color: var(--text-secondary);
     }
 
-    /* ===== FAQ ===== */
+    .pricing-note {
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--text-tertiary);
+    }
+
+    /* ===== FAQ (Wope style) ===== */
     .faq-section {
       text-align: center;
     }
@@ -1042,15 +1011,17 @@
     }
 
     .faq-item {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
       border-radius: var(--radius-md);
       overflow: hidden;
-      transition: all 0.2s ease-out;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.3s;
     }
 
     .faq-item:hover {
-      border-color: #2d3748;
+      border-color: rgba(255, 255, 255, 0.12);
     }
 
     .faq-question {
@@ -1066,8 +1037,8 @@
       font-weight: 600;
       cursor: pointer;
       text-align: left;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      transition: color 0.2s ease-out;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: color 0.3s;
     }
 
     .faq-question:hover {
@@ -1075,9 +1046,9 @@
     }
 
     .faq-chevron {
+      font-size: 20px;
       transition: transform 0.3s;
       color: var(--text-tertiary);
-      flex-shrink: 0;
     }
 
     .faq-item.open .faq-chevron {
@@ -1088,7 +1059,7 @@
     .faq-answer {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .faq-answer-inner {
@@ -1101,15 +1072,15 @@
     /* ===== CTA SECTION ===== */
     .cta-section {
       text-align: center;
-      padding: 96px 24px;
+      padding: 160px 24px;
       position: relative;
     }
 
     .cta-glow {
       position: absolute;
-      width: 700px;
-      height: 700px;
-      background: radial-gradient(circle, rgba(255, 107, 0, 0.06), transparent 60%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 107, 0, 0.12), transparent 60%);
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -1145,7 +1116,7 @@
 
     /* ===== FOOTER ===== */
     .footer {
-      border-top: 1px solid var(--card-border);
+      border-top: 1px solid var(--glass-border);
       padding: 48px 24px;
     }
 
@@ -1171,7 +1142,7 @@
       font-size: 13px;
       color: var(--text-tertiary);
       text-decoration: none;
-      transition: color 0.2s ease-out;
+      transition: color 0.3s;
     }
 
     .footer-links a:hover {
@@ -1181,8 +1152,8 @@
     /* ===== SCROLL ANIMATIONS ===== */
     .reveal {
       opacity: 0;
-      transform: translateY(8px);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .reveal.visible {
@@ -1190,84 +1161,39 @@
       transform: translateY(0);
     }
 
-    .reveal-delay-1 { transition-delay: 0.05s; }
-    .reveal-delay-2 { transition-delay: 0.1s; }
-    .reveal-delay-3 { transition-delay: 0.15s; }
-    .reveal-delay-4 { transition-delay: 0.2s; }
-    .reveal-delay-5 { transition-delay: 0.25s; }
-    .reveal-delay-6 { transition-delay: 0.3s; }
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: 0.4s;
+    }
+
+    .reveal-delay-5 {
+      transition-delay: 0.5s;
+    }
+
+    .reveal-delay-6 {
+      transition-delay: 0.6s;
+    }
 
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(30px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
-      }
-    }
-
-    /* ===== FOCUS VISIBLE ===== */
-    :focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
-
-    :focus:not(:focus-visible) {
-      outline: none;
-    }
-
-    /* ===== SKIP LINK ===== */
-    .skip-link {
-      position: absolute;
-      top: -100%;
-      left: 16px;
-      z-index: 200;
-      padding: 8px 16px;
-      background: var(--accent);
-      color: #fff;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 8px;
-      text-decoration: none;
-    }
-
-    .skip-link:focus {
-      top: 16px;
-    }
-
-    /* ===== HAMBURGER ===== */
-    .nav-hamburger {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-primary);
-      cursor: pointer;
-      padding: 8px;
-    }
-
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ===== REDUCED MOTION ===== */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-      .reveal {
-        opacity: 1;
-        transform: none;
       }
     }
 
@@ -1296,39 +1222,16 @@
         grid-template-columns: 1fr;
       }
 
+      .roadmap-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       .navbar {
         padding: 12px 20px;
       }
 
-      .nav-hamburger {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
       .nav-links {
         display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        background: rgba(6, 6, 8, 0.95);
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        border-bottom: 1px solid var(--card-border);
-        padding: 16px 24px;
-        gap: 16px;
-      }
-
-      .nav-links.open {
-        display: flex;
-        animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-
-      .nav-links a {
-        font-size: 16px;
-        padding: 8px 0;
       }
 
       .comp-header,
@@ -1340,7 +1243,7 @@
       }
 
       section {
-        padding: 64px 20px;
+        padding: 80px 20px;
       }
     }
 
@@ -1377,8 +1280,12 @@
 
 <body>
 
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-
+  <!-- Ambient Background -->
+  <div class="ambient-bg">
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+  </div>
   <div class="grid-overlay"></div>
 
   <div class="content-wrap">
@@ -1397,33 +1304,29 @@
           <li><a href="https://www.jermainegrantstore.com/cart/56631955095930:1" class="nav-cta">Get QuickFX — $39.99</a>
           </li>
         </ul>
-        <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation" aria-expanded="false">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
-        </button>
       </div>
     </nav>
 
     <!-- ===== HERO ===== -->
-    <section class="hero" id="main-content">
+    <section class="hero">
       <video class="hero-bg-video" autoplay loop muted playsinline>
         <source src="videos/hero-cinematic.mp4" type="video/mp4">
       </video>
       <div class="hero-overlay"></div>
-      <div class="hero-glow"></div>
       <div class="hero-content">
         <div class="hero-badge">
           <span class="hero-badge-dot"></span>
           Premiere Pro Plugin — Windows
         </div>
-        <h1>Stop Searching. <span class="gradient-text">Start Editing.</span></h1>
-        <p class="hero-sub">QuickFX is a keyboard-triggered search popup for Premiere Pro. <span class="kbd-text">Press your shortcut</span>. Type the
-          effect name. <span class="kbd-text">Hit Enter</span>. Done. Find and apply any effect in seconds.</p>
+        <h1><span class="gradient-text">Stop Searching.</span> Start Editing.</h1>
+        <p class="hero-sub">QuickFX is a keyboard-triggered search popup for Premiere Pro. Press your shortcut. Type the
+          effect name. Hit Enter. Done. Find and apply any effect in seconds.</p>
         <div class="hero-actions">
           <a href="https://www.jermainegrantstore.com/cart/56631955095930:1" class="btn-primary">
-            <img src="01_the_lightning_bolt.png" alt="" width="16" height="16" style="display:inline;vertical-align:middle;"> Get QuickFX Now
+            <span>&#9889;</span> Get QuickFX Now
           </a>
           <a href="#features" class="btn-secondary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg> See it in Action
+            <span>&#9654;</span> See it in Action
           </a>
         </div>
         <p class="hero-price">Founding Member Price: <strong>$39.99</strong> <span
@@ -1437,7 +1340,7 @@
     <section id="features">
       <div class="section-container">
         <div class="reveal">
-          <span class="section-label"><img src="01_the_lightning_bolt.png" alt="" width="20" height="20" style="display:inline;vertical-align:middle;"> Features</span>
+          <span class="section-label">&#9889; Features</span>
           <h2 class="section-title">Everything You Need,<br>Nothing You Don't</h2>
           <p class="section-desc">QuickFX strips away the clutter and gives you instant access to every effect,
             transition, and audio tool in Premiere Pro.</p>
@@ -1445,7 +1348,7 @@
 
         <div class="features-grid">
           <div class="feature-card reveal reveal-delay-1">
-            <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
+            <div class="feature-icon">&#128269;</div>
             <div class="feature-title">Spotlight-Style Search</div>
             <div class="feature-desc">Instant floating search across 900+ effects, transitions, and audio tools.</div>
             <div class="feature-card-visual">
@@ -1456,7 +1359,7 @@
           </div>
 
           <div class="feature-card reveal reveal-delay-2">
-            <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></div>
+            <div class="feature-icon">&#128165;</div>
             <div class="feature-title">Multi-Clip Apply</div>
             <div class="feature-desc">Select multiple clips, apply one effect to all of them at once.</div>
             <div class="feature-card-visual">
@@ -1467,7 +1370,7 @@
           </div>
 
           <div class="feature-card reveal reveal-delay-3">
-            <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="feature-icon">&#11088;</div>
             <div class="feature-title">Favourites</div>
             <div class="feature-desc">Star your most-used effects so they always appear first.</div>
             <div class="feature-card-visual">
@@ -1478,7 +1381,7 @@
           </div>
 
           <div class="feature-card reveal reveal-delay-4">
-            <div class="feature-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="feature-icon">&#128340;</div>
             <div class="feature-title">Recently Used</div>
             <div class="feature-desc">Your last applied effects automatically appear at the top.</div>
             <div class="feature-card-visual">
@@ -1497,7 +1400,7 @@
         <span class="promise-dot"></span>
         One-time purchase
         <span class="promise-dot"></span>
-        <span class="promise-highlight">All v1 + v2 updates included</span>
+        <span class="promise-highlight">Free updates forever</span>
         <span class="promise-dot"></span>
         No subscription
       </div>
@@ -1507,7 +1410,7 @@
     <section id="how">
       <div class="section-container" style="text-align:center;">
         <div class="reveal">
-          <span class="section-label"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg> How it Works</span>
+          <span class="section-label">&#9881; How it Works</span>
           <h2 class="section-title">Three Steps. Zero Friction.</h2>
           <p class="section-desc" style="margin:0 auto;">Install once, use forever. QuickFX integrates directly into
             Premiere Pro with no setup headaches.</p>
@@ -1519,14 +1422,11 @@
             <div class="step-title">Install</div>
             <div class="step-desc">Run the installer. QuickFX adds itself to Premiere Pro and launches a lightweight
               helper app in your system tray.</div>
-            <div class="feature-card-visual">
-              <img src="quickfx_installer_image.jpg" alt="QuickFX Installer" style="width:100%; border-radius:8px;">
-            </div>
           </div>
           <div class="step-card reveal reveal-delay-2">
             <div class="step-number">2</div>
             <div class="step-title">Trigger</div>
-            <div class="step-desc"><span class="kbd-text">Press your keyboard shortcut</span> from anywhere inside Premiere Pro. The floating search
+            <div class="step-desc">Press your keyboard shortcut from anywhere inside Premiere Pro. The floating search
               popup appears instantly over your timeline.</div>
             <div class="feature-card-visual">
               <video autoplay loop muted playsinline>
@@ -1537,13 +1437,8 @@
           <div class="step-card reveal reveal-delay-3">
             <div class="step-number">3</div>
             <div class="step-title">Apply</div>
-            <div class="step-desc">Type the effect name, <span class="kbd-text">arrow to select</span>, <span class="kbd-text">hit Enter</span>. It applies to your selected clip(s)
-              immediately. <span class="kbd-text">Escape</span> to close. That's it.</div>
-            <div class="feature-card-visual">
-              <video autoplay loop muted playsinline>
-                <source src="videos/quickfx_apply.mp4" type="video/mp4">
-              </video>
-            </div>
+            <div class="step-desc">Type the effect name, arrow to select, hit Enter. It applies to your selected clip(s)
+              immediately. Escape to close. That's it.</div>
           </div>
         </div>
       </div>
@@ -1553,7 +1448,7 @@
     <section id="compare" class="comparison-section">
       <div class="section-container">
         <div class="reveal">
-          <span class="section-label"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg> Compare</span>
+          <span class="section-label">&#9878; Compare</span>
           <h2 class="section-title">QuickFX vs The Old Way</h2>
           <p class="section-desc" style="margin:0 auto;">Every editor knows the pain. Here's what changes.</p>
         </div>
@@ -1611,44 +1506,26 @@
     <section id="testimonials">
       <div class="section-container">
         <div class="reveal" style="text-align:center;">
-          <span class="section-label"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg> Testimonials</span>
+          <span class="section-label">&#9733; Testimonials</span>
           <h2 class="section-title">Editors Love QuickFX</h2>
         </div>
         <div class="testimonials-grid">
           <div class="testimonial-card reveal reveal-delay-1">
-            <div class="testimonial-stars" aria-label="5 out of 5 stars">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <div class="testimonial-quote">"I used to waste so much time digging through the effects panel. QuickFX
               completely changed my workflow. I can not edit without it now."</div>
             <div class="testimonial-author">Marcus T.</div>
             <div class="testimonial-role">Freelance Video Editor</div>
           </div>
           <div class="testimonial-card reveal reveal-delay-2">
-            <div class="testimonial-stars" aria-label="5 out of 5 stars">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <div class="testimonial-quote">"The multi-clip apply alone is worth the price. I edit wedding videos and
               applying the same colour effect to 30 clips at once saves me hours every week."</div>
             <div class="testimonial-author">Sarah L.</div>
             <div class="testimonial-role">Wedding Videographer</div>
           </div>
           <div class="testimonial-card reveal reveal-delay-3">
-            <div class="testimonial-stars" aria-label="5 out of 5 stars">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
+            <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <div class="testimonial-quote">"Simple, fast, does exactly what it says. The favourites feature means my top
               5 effects are always one shortcut away."</div>
             <div class="testimonial-author">Daniel K.</div>
@@ -1686,33 +1563,33 @@
                 class="pricing-current">$39.99</span></div>
             <div class="pricing-sub">One-time payment &middot; Yours forever &middot; No subscription</div>
             <div
-              style="margin-bottom:28px;padding:12px 20px;background:rgba(255,107,0,0.08);border:1px solid rgba(255,107,0,0.12);border-radius:var(--radius-sm);text-align:center;">
-              <span style="color:var(--accent);font-weight:700;font-size:14px;">Buy once. No subscription.</span>
+              style="margin-bottom:28px;padding:12px 20px;background:var(--accent-glow);border:1px solid rgba(255,107,0,0.2);border-radius:var(--radius-sm);text-align:center;">
+              <span style="color:var(--accent);font-weight:700;font-size:14px;">Buy once. Free updates forever.</span>
             </div>
             <div class="pricing-features">
-              <div class="pricing-feature"><span class="pricing-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Instant search across 908+
+              <div class="pricing-feature"><span class="pricing-check">&#10003;</span><span>Instant search across 908+
                   effects</span></div>
-              <div class="pricing-feature"><span class="pricing-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Multi-clip batch
+              <div class="pricing-feature"><span class="pricing-check">&#10003;</span><span>Multi-clip batch
                   apply</span></div>
-              <div class="pricing-feature"><span class="pricing-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Recently used effects</span>
+              <div class="pricing-feature"><span class="pricing-check">&#10003;</span><span>Recently used effects</span>
               </div>
-              <div class="pricing-feature"><span class="pricing-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Favourites system</span>
+              <div class="pricing-feature"><span class="pricing-check">&#10003;</span><span>Favourites system</span>
               </div>
-              <div class="pricing-feature"><span class="pricing-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Video, audio &amp;
+              <div class="pricing-feature"><span class="pricing-check">&#10003;</span><span>Video, audio &amp;
                   transition effects</span></div>
-              <div class="pricing-feature"><span class="pricing-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Floating popup over your
+              <div class="pricing-feature"><span class="pricing-check">&#10003;</span><span>Floating popup over your
                   timeline</span></div>
-              <div class="pricing-feature"><span class="pricing-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Premiere Pro CC
+              <div class="pricing-feature"><span class="pricing-check">&#10003;</span><span>Premiere Pro CC
                   2021&ndash;2026</span></div>
-              <div class="pricing-feature"><span class="pricing-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>All v1 + v2 updates included</span></div>
+              <div class="pricing-feature"><span class="pricing-check">&#10003;</span><span>Free v1 updates</span></div>
             </div>
             <a href="https://www.jermainegrantstore.com/cart/56631955095930:1"
-              class="btn-primary pricing-btn"><img src="01_the_lightning_bolt.png" alt="" width="16" height="16" style="display:inline;vertical-align:middle;"> Get QuickFX &mdash; $39.99</a>
+              class="btn-primary pricing-btn"><span>&#9889;</span> Get QuickFX &mdash; $39.99</a>
             <div class="pricing-footer">Instant delivery &middot; License key via email</div>
             <p class="compat-note">Windows 10/11 only. Premiere Pro CC 2021 or later required. Mac version coming soon.
             </p>
           </div>
-          <div class="pricing-note">One-time purchase. All updates through v2 included. No subscription.<br>Price increases to $59.99 after
+          <div class="pricing-note">Buy once. Yours forever. No subscription, ever.<br>Price increases to $59.99 after
             the first 50 sales.</div>
         </div>
       </div>
@@ -1722,15 +1599,15 @@
     <section id="faq" class="faq-section">
       <div class="section-container">
         <div class="reveal">
-          <span class="section-label"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg> FAQ</span>
+          <span class="section-label">&#10068; FAQ</span>
           <h2 class="section-title">Frequently Asked Questions</h2>
         </div>
 
         <div class="faq-grid reveal reveal-delay-1">
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
+            <button class="faq-question" onclick="toggleFaq(this)">
               What versions of Premiere Pro does QuickFX support?
-              <span class="faq-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              <span class="faq-chevron">&#9660;</span>
             </button>
             <div class="faq-answer">
               <div class="faq-answer-inner">QuickFX supports Premiere Pro CC 2021 (v15.0) and above on Windows. Mac
@@ -1739,9 +1616,9 @@
           </div>
 
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
+            <button class="faq-question" onclick="toggleFaq(this)">
               Is this a subscription?
-              <span class="faq-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              <span class="faq-chevron">&#9660;</span>
             </button>
             <div class="faq-answer">
               <div class="faq-answer-inner">No. QuickFX is a one-time purchase. Pay once, use it forever. All v1 updates
@@ -1750,9 +1627,9 @@
           </div>
 
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
+            <button class="faq-question" onclick="toggleFaq(this)">
               How do I install QuickFX?
-              <span class="faq-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              <span class="faq-chevron">&#9660;</span>
             </button>
             <div class="faq-answer">
               <div class="faq-answer-inner">After purchase, you'll receive a download link and a license key. Run the
@@ -1762,9 +1639,9 @@
           </div>
 
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
+            <button class="faq-question" onclick="toggleFaq(this)">
               Does QuickFX work with presets?
-              <span class="faq-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              <span class="faq-chevron">&#9660;</span>
             </button>
             <div class="faq-answer">
               <div class="faq-answer-inner">Preset support is coming in v2. Right now, QuickFX searches and applies all
@@ -1773,9 +1650,9 @@
           </div>
 
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
+            <button class="faq-question" onclick="toggleFaq(this)">
               What if I have problems or need support?
-              <span class="faq-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              <span class="faq-chevron">&#9660;</span>
             </button>
             <div class="faq-answer">
               <div class="faq-answer-inner">Email me directly. I built QuickFX as a solo developer and editor with 10+
@@ -1785,9 +1662,9 @@
           </div>
 
           <div class="faq-item">
-            <button class="faq-question" aria-expanded="false">
+            <button class="faq-question" onclick="toggleFaq(this)">
               Will there be a Mac version?
-              <span class="faq-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              <span class="faq-chevron">&#9660;</span>
             </button>
             <div class="faq-answer">
               <div class="faq-answer-inner">Yes, Mac support is actively in development and will be available as a free
@@ -1802,49 +1679,49 @@
     <section id="roadmap">
       <div class="section-container">
         <div class="reveal" style="text-align:center;">
-          <span class="section-label"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg> Roadmap</span>
+          <span class="section-label">&#128640; Roadmap</span>
           <h2 class="section-title">And this is just v1.</h2>
           <p class="section-desc" style="margin:0 auto;">QuickFX v2 is already in development. Founding members get
             every update free.</p>
         </div>
         <div class="roadmap-grid">
           <div class="roadmap-card reveal reveal-delay-1"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg></div>
+            <div class="roadmap-icon">&#128190;</div>
             <div class="roadmap-title">Custom Presets</div>
             <div class="roadmap-desc">Add and apply your own saved presets from the QuickFX popup</div>
           </div>
           <div class="roadmap-card reveal reveal-delay-2"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+            <div class="roadmap-icon">&#128200;</div>
             <div class="roadmap-title">Keyframe Bezier Graph</div>
             <div class="roadmap-desc">Visual curve editor &mdash; set keyframes by manipulating a graph</div>
           </div>
           <div class="roadmap-card reveal reveal-delay-3"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div>
+            <div class="roadmap-icon">&#128248;</div>
             <div class="roadmap-title">In-App Screenshot</div>
             <div class="roadmap-desc">Capture screenshots of your program directly from QuickFX</div>
           </div>
           <div class="roadmap-card reveal reveal-delay-4"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></div>
+            <div class="roadmap-icon">&#128269;</div>
             <div class="roadmap-title">Category Filters</div>
             <div class="roadmap-desc">Toggle: All / Video FX / Audio FX / Transitions / Presets</div>
           </div>
           <div class="roadmap-card reveal reveal-delay-5"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.001"/><path d="M10 8h.001"/><path d="M14 8h.001"/><path d="M18 8h.001"/><path d="M8 12h.001"/><path d="M12 12h.001"/><path d="M16 12h.001"/><path d="M7 16h10"/></svg></div>
+            <div class="roadmap-icon">&#9000;</div>
             <div class="roadmap-title">Customisable Shortcut</div>
             <div class="roadmap-desc">Choose your own trigger shortcut within the plugin</div>
           </div>
           <div class="roadmap-card reveal reveal-delay-6"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg></div>
+            <div class="roadmap-icon">&#128203;</div>
             <div class="roadmap-title">Effect Chain Copy/Paste</div>
             <div class="roadmap-desc">Copy all effects from one clip, paste to another in one action</div>
           </div>
           <div class="roadmap-card reveal reveal-delay-1"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/></svg></div>
+            <div class="roadmap-icon">&#128202;</div>
             <div class="roadmap-title">Batch Progress Bar</div>
             <div class="roadmap-desc">Visual progress when applying effects to 20+ clips</div>
           </div>
           <div class="roadmap-card reveal reveal-delay-2"><span class="v2-badge">v2</span>
-            <div class="roadmap-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></div>
+            <div class="roadmap-icon">&#128465;</div>
             <div class="roadmap-title">Remove Transitions</div>
             <div class="roadmap-desc">Strip transitions without hunting through the timeline</div>
           </div>
@@ -1857,25 +1734,25 @@
       <div class="cta-glow"></div>
       <div class="section-container" style="position:relative;">
         <div class="reveal">
-          <span class="section-label"><img src="01_the_lightning_bolt.png" alt="" width="20" height="20" style="display:inline;vertical-align:middle;"> Launch Offer</span>
+          <span class="section-label">&#9889; Launch Offer</span>
           <h2 class="section-title">Stop Searching.<br>Start Editing.</h2>
           <p class="section-desc" style="margin:0 auto;">Get QuickFX at the founding member price before it goes up.</p>
         </div>
         <div class="reveal reveal-delay-2" style="margin-top:48px;">
           <a href="https://www.jermainegrantstore.com/cart/56631955095930:1" class="btn-primary"
             style="font-size:17px; padding:20px 48px;">
-            <img src="01_the_lightning_bolt.png" alt="" width="16" height="16" style="display:inline;vertical-align:middle;"> Get QuickFX — $39.99
+            <span>&#9889;</span> Get QuickFX — $39.99
           </a>
           <div style="margin-top:16px;margin-bottom:8px;">
             <span
-              style="display:inline-block;padding:8px 20px;background:rgba(255,107,0,0.08);border:1px solid rgba(255,107,0,0.12);border-radius:8px;font-size:14px;font-weight:700;color:var(--accent);">Buy
-              once. No subscription.</span>
+              style="display:inline-block;padding:8px 20px;background:var(--accent-glow);border:1px solid rgba(255,107,0,0.2);border-radius:50px;font-size:14px;font-weight:700;color:var(--accent);">Buy
+              once. Free updates forever.</span>
           </div>
           <div class="cta-meta">
-            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> One-time payment</span>
-            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> No subscription</span>
-            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Yours forever</span>
-            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Instant delivery</span>
+            <span>&#10003; One-time payment</span>
+            <span>&#10003; No subscription</span>
+            <span>&#10003; Yours forever</span>
+            <span>&#10003; Instant delivery</span>
           </div>
           <p class="compat-note">Windows 10/11 only. Premiere Pro CC 2021 or later required. Mac version coming soon.
           </p>
@@ -1886,7 +1763,7 @@
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
       <div class="footer-inner">
-        <div class="footer-left">&copy; 2026 QuickFX <img src="01_the_lightning_bolt.png" alt=""
+        <div class="footer-left">&copy; 2026 QuickFX <img src="the_lightning_bolt.png" alt=""
             style="height:16px;margin:0 4px;vertical-align:text-bottom;"> by Jermaine Grant. All
           rights reserved.</div>
         <div class="footer-links">
@@ -1918,43 +1795,23 @@
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // ===== MOBILE NAV TOGGLE =====
-    const hamburger = document.getElementById('navHamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', isOpen);
-    });
-
-    // Close mobile nav when a link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
-    });
-
     // ===== FAQ TOGGLE =====
-    document.querySelectorAll('.faq-question').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const item = btn.parentElement;
-        const answer = item.querySelector('.faq-answer');
-        const isOpen = item.classList.contains('open');
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
 
-        // Close all
-        document.querySelectorAll('.faq-item').forEach(i => {
-          i.classList.remove('open');
-          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-          i.querySelector('.faq-answer').style.maxHeight = '0';
-        });
-
-        if (!isOpen) {
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-          answer.style.maxHeight = answer.scrollHeight + 'px';
-        }
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').style.maxHeight = '0';
       });
-    });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    }
 
   </script>
 </body>
